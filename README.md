@@ -74,3 +74,7 @@ quasi-steady form.
 The calibrated runs hold the physical grid spacing at 0.05 mm, not the number
 of grid points, so that the 0.66 mm tau front stays resolved on long segments.
 The outer-maximum speed is 1.651 mm per month on both 30 and 40 mm segments.
+
+## License
+
+MIT; see `LICENSE`.
