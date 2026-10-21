@@ -128,7 +128,7 @@ plot(mo, gc.phys.x_front_mm, 'k--'); hold off; box on
 ylabel('distance from source (mm)');
 legend({'{\itR}_2 maximum', '\partial{\itM}/\partial{\itt} maximum', 'tau front'}, ...
        'Location', 'northwest');
-title('(a)  calibrated run, 30 mm segment', 'FontWeight', 'normal');
+title('(a)  dimensionally mapped run, 30 mm segment', 'FontWeight', 'normal');
 subplot(2, 1, 2);
 plot(mo, gc.phys.x_R2_mm - gc.phys.x_front_mm, 'k-'); box on
 xlabel('time (months)'); ylabel('lead (mm)');
