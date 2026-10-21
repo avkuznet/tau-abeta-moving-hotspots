@@ -6,7 +6,7 @@ moving hotspots of amyloid-β secondary nucleation: a reaction–diffusion model
 
 ```matlab
 cd matlab
-run_all            % numerical report against the manuscript (~15 s)
+run_all            % every number quoted in Sections 4 and 5 (a few minutes)
 run_all('quick')   % short horizon, coarse grid; checks that the code runs
 make_figures       % Figs. 2–9 of the manuscript, written to ../figures
 ```
@@ -48,9 +48,11 @@ used for Sections 5.1–5.4.
 Figs. 7–9. The two tau parameters fix the units against Meisl et al. (2021):
 one time unit is 0.50 months and, for `Lmm = 7.20`, one length unit is
 7.20 mm. `lam` and `D_m` are then set from Cirrito et al. (2003) and Waters
-(2010), and `k_E` so that the kinetic Damköhler number in the depleted wake
-matches Hong et al. (2011). For longer segments `D_T` and `D_m` are rescaled
-with `Lmm` so that the physical coefficients are unchanged.
+(2010), and `k_E` so that the kinetic Damköhler number in tau-exposed tissue
+is of the order of the 1.2–2.3 derived from Hong et al. (2011). For longer
+segments `D_T` and `D_m` are rescaled with `Lmm` so that the physical
+coefficients are unchanged, and the initial tau pulse keeps its physical
+width of 0.288 mm.
 
 ## The quasi-steady reduction
 
@@ -73,7 +75,14 @@ quasi-steady form.
 
 The calibrated runs hold the physical grid spacing at 0.05 mm, not the number
 of grid points, so that the 0.66 mm tau front stays resolved on long segments.
-The outer-maximum speed is 1.651 mm per month on both 30 and 40 mm segments.
+Fitted over 5–15 months, the outer-maximum speed is 1.650 mm per month on 30,
+40 and 50 mm segments, with identical positions; a 20 mm segment gives 1.56.
+
+## Conventions used in the report
+
+Positions "at grid resolution" are the grid point of largest R_2;
+`hotspot_post` returns parabolic sub-grid positions. Speeds are least-squares
+slopes over t = 10–30 (reference run) and 5–15 months (mapped runs).
 
 ## License
 

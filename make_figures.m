@@ -131,8 +131,8 @@ legend({'{\itR}_2 maximum', '\partial{\itM}/\partial{\itt} maximum', 'tau front'
 title('(a)  calibrated run, 30 mm segment', 'FontWeight', 'normal');
 subplot(2, 1, 2);
 plot(mo, gc.phys.x_R2_mm - gc.phys.x_front_mm, 'k-'); box on
-xlabel('time (months)'); ylabel('lead of {\itR}_2 over the front (mm)');
-title('(b)  the maximum runs ahead of the tau field', 'FontWeight', 'normal');
+xlabel('time (months)'); ylabel('lead (mm)');
+title('(b)  lead of the {\itR}_2 maximum over the {\itT} = 0.1 contour', 'FontWeight', 'normal');
 save_fig(f, 'fig7'); close(f);
 
 %% Fig 8  -------------------------------------------------------------------
@@ -156,15 +156,16 @@ for i = 1:numel(Lo)
 end
 f = figure('Units', 'inches', 'Position', [1 1 6.5 3.8], 'Color', 'w');
 ax = axes(f); hold(ax, 'on'); yl = [1 2.05];
-patch([0.006 0.05 0.05 0.006], [yl(1) yl(1) yl(2) yl(2)], [0.80 0.90 0.80], ...
+% shaded: Koffie et al. (2009) halo, 6.5 +/- 4.1 um beyond the plaque core
+patch([0.0024 0.0106 0.0106 0.0024], [yl(1) yl(1) yl(2) yl(2)], [0.80 0.90 0.80], ...
       'EdgeColor', 'none', 'FaceAlpha', 0.7);
 plot([2.64 2.64], yl, '-', 'Color', [0.85 0.33 0.10], 'LineWidth', 1.4);
-plot([0.005 4], [base base], 'k:', 'LineWidth', 1);
+plot([0.002 4], [base base], 'k:', 'LineWidth', 1);
 plot(Lo, con, 'o-', 'Color', [0 0.45 0.74], 'MarkerFaceColor', 'w', 'LineWidth', 1.3);
-hold(ax, 'off'); box on; set(ax, 'XScale', 'log'); ylim(yl); xlim([0.005 4]);
+hold(ax, 'off'); box on; set(ax, 'XScale', 'log'); ylim(yl); xlim([0.002 4]);
 xlabel('oligomer transport length  ({\itD_S}/{\itk}_{conv})^{1/2}  (mm)');
 ylabel({'contrast of the maximum', '{\itR}_2 at maximum / {\itR}_2 at source'});
-text(0.017, 1.95, {'oligomer halo', 'in vivo'}, 'HorizontalAlignment', 'center', 'FontSize', 8);
+text(0.005, 1.95, {'oligomer halo', '(fixed tissue)'}, 'HorizontalAlignment', 'center', 'FontSize', 8);
 text(2.64, 1.95, {'capillary', 'in vitro'}, 'HorizontalAlignment', 'center', ...
      'FontSize', 8, 'Color', [0.85 0.33 0.10]);
 title('spatial structure survives only for immobile nucleation products', ...
@@ -182,8 +183,8 @@ sb = hotspot_solve(hotspot_params('calibrated', Lc9), o9);
 gb = hotspot_post(sb); Rb = gb.R2(end, :); cb = max(Rb) / Rb(1);
 lam9 = sb.p.lam; Msrc = sb.M(end, 1);
 
-koff = [0 0.003 0.01 0.0228 0.0342 0.0456];
-relf = koff * Msrc / lam9;              % release flux / production flux
+relf = [0 0.1 0.25 0.5 0.75 1.0];       % release flux / production flux at the source
+koff = relf * lam9 / Msrc;
 c1 = zeros(size(koff));
 for i = 1:numel(koff)
     q = hotspot_params('calibrated', Lc9);
@@ -198,7 +199,7 @@ for i = 1:numel(sig)
     if sig(i) < 1, q.sig_lo = sig(i); end
     R = getfield(hotspot_post(hotspot_solve(q, o9)), 'R2'); R = R(end, :);
     c2(i) = max(R) / R(1);
-    q.k_off = 0.0228;
+    q.k_off = 0.5 * lam9 / Msrc;        % release at half the production flux
     R = getfield(hotspot_post(hotspot_solve(q, o9)), 'R2'); R = R(end, :);
     c3(i) = max(R) / R(1);
 end
@@ -211,7 +212,7 @@ box on; xlim([0 1.1]); ylim([0.95 2.7]);
 xlabel({'release flux / production flux', 'at the tau source'});
 ylabel('contrast of the maximum');
 title('(a)  reversible deposition', 'FontWeight', 'normal');
-text(1.0, 2.5, {'required by the', 'half-life doubling'}, 'HorizontalAlignment', 'right', 'FontSize', 8);
+text(1.0, 2.5, {'release =', 'production'}, 'HorizontalAlignment', 'right', 'FontSize', 8);
 ax.Toolbar = [];
 
 ax = subplot(1, 2, 2);

@@ -20,10 +20,9 @@ function p = hotspot_params(name, Lmm)
 %   lam  and D_m are set from measurement:
 %       lambda_m = ln2/1.97 h = 9.77e-5 s^-1  (Cirrito et al. 2003)  -> 126.7
 %       D_m      = 62.3 um^2 s^-1             (Waters 2010)          ->   1.557
-%   k_E is then chosen so that the kinetic Damkohler number reached in the
-%   depleted wake matches the measured value, Da_EC = 2k_E P/lambda = 1.4 to
-%   2.3 (Hong et al. 2011, from tracer recovery and from steady-state ISF
-%   Abeta). Because the absolute scale of the fibril-number variable P is
+%   k_E is then chosen so that the kinetic Damkohler number in tau-exposed
+%   tissue is of the order of the 1.2 to 2.3 derived from Hong et al. (2011)
+%   (tracer recovery and steady-state ISF Abeta; Section 5.5). Because the absolute scale of the fibril-number variable P is
 %   arbitrary in the dimensionless model, that scale is absorbed into k_E;
 %   k_tau, k_2, mu_P, nu and M_c are left at their reference values, no
 %   independent measurement constraining them.
@@ -34,12 +33,10 @@ function p = hotspot_params(name, Lmm)
 %   monomer, which raises nucleation and hence P, largely cancelling the
 %   change. Da_EC is the more sensitive target and is what k_E is set by.
 %
-%   Achieved at k_E = 15, for checking the run:
-%       Da_EC               1.0 to 2.5 over the run   (measured 1.4 to 2.3)
-%       screening length    500 to 790 um             (estimated 442 to 530)
-%       depletion at source 81.1% at 6 months         (Hong 2011, Abeta42: 81%)
-%       monomer relaxation is ~1.4e3 times faster than tau replication, which
-%       is what justifies the quasi-steady reduction of Eq. (16).
+%   run_all section 4 prints what k_E = 15 achieves (Da_EC at the maximum and
+%   at the source, depletion at the source). Monomer relaxation is ~1.4e3
+%   times faster than tau replication, which is what justifies the
+%   quasi-steady reduction of Eq. (16).
 
 if nargin < 1, name = 'reference'; end
 
@@ -89,9 +86,12 @@ end
 
 p.name = lower(name);
 
-% initial tau pulse, T(x,0) = T0*exp(-(x/w)^2)
+% initial tau pulse, T(x,0) = T0*exp(-(x/w)^2). Its width is a physical
+% length, 0.288 mm (= 0.04 x 7.20 mm), so that the seed is the same on every
+% segment length; with w = 0.04 in domain units it would widen in proportion
+% to Lmm and the long-segment runs would not be comparable.
 p.T0 = 0.02;
-p.w  = 0.04;
+if strcmp(lower(name), 'calibrated'), p.w = 0.288 / Lmm; else, p.w = 0.04; end
 
 % physical scales (Section 2.6)
 p.scale.tau_months = 0.50;   % one time unit, months
