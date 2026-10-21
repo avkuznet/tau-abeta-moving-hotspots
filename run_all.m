@@ -66,9 +66,14 @@ fprintf('  Eq. (18) relative error, t = 10-30: grid maximum mean %.2f%%, max %.2
         100 * mean(eg), 100 * max(eg));
 fprintf('                                      sub-grid maximum mean %.3f%%, max %.3f%%\n', ...
         100 * mean(es), 100 * max(es));
-for tt = [10 30]
-    j = nearest(dg.t, tt);
-    fprintf('  t = %2d: Da_EC = %.2f, Da_D = %.1f at the maximum\n', tt, dg.Da_EC(j), dg.Da_D(j));
+pubDa = [2.50 15.0; 7.55 45.3];
+for q = 1:2
+    tt = 10 + 20 * (q - 1); if tt > max(dg.t), continue; end
+    j = nearest(dg.t, tt); i = find(dg.x == xg(j), 1);
+    sink = 2 * p.k_E * sol.P(j, i);
+    fprintf(['  t = %2d: Da_EC = %.2f, Da_D = %.1f at the grid maximum (published %.2f, %.1f);' ...
+             ' %.2f, %.1f at the sub-grid maximum\n'], tt, sink / p.lam, sink / p.D_m, ...
+            pubDa(q, 1), pubDa(q, 2), dg.Da_EC(j), dg.Da_D(j));
 end
 fprintf('  in months on the 7.2 mm reference segment: maximum leaves the source at %.2f\n', ...
         dg.t(jd) * p.scale.tau_months);
