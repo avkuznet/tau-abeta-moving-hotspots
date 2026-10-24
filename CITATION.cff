@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: 'MATLAB code for "Tau creates spatially moving hotspots of amyloid-β secondary nucleation: a reaction–diffusion model"'
+abstract: >-
+  MATLAB implementation of the one-dimensional reaction–diffusion model of
+  tau-driven, spatially moving hotspots of amyloid-β secondary nucleation.
+  Includes the method-of-lines solver, the diagnostic routines, the reference
+  and dimensionally mapped parameter sets, a driver that reproduces every
+  numerical result quoted in Sections 4 and 5 of the manuscript, and a script
+  that regenerates Figs. 2–9. Base MATLAB only; no toolboxes required.
+type: software
+authors:
+  - family-names: Kuznetsov
+    given-names: Andrey V.
+    affiliation: "Department of Mechanical and Aerospace Engineering, North Carolina State University, Raleigh, NC 27695-7910, USA"
+version: v1.0.0
+date-released: 2026-10-24
+license: MIT
+doi: 10.5281/zenodo.23608682
+repository-code: "https://github.com/avkuznet/tau-abeta-moving-hotspots"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23608682
+    description: Version v1.0.0 of this software
+  - type: doi
+    value: 10.5281/zenodo.23608681
+    description: Concept DOI, always resolving to the latest version
+keywords:
+  - Alzheimer disease
+  - amyloid-beta
+  - tau
+  - secondary nucleation
+  - reaction-diffusion
+  - Damkohler number
+  - mathematical modeling
+  - MATLAB
