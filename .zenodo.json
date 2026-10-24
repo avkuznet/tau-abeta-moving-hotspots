@@ -1,0 +1,17 @@
+{
+  "title": "MATLAB code for \"Tau creates spatially moving hotspots of amyloid-\u03b2 secondary nucleation: a reaction\u2013diffusion model\"",
+  "upload_type": "software",
+  "license": "mit",
+  "creators": [
+    {
+      "name": "Kuznetsov, Andrey V.",
+      "affiliation": "Department of Mechanical and Aerospace Engineering, North Carolina State University, Raleigh, NC 27695-7910, USA"
+    }
+  ],
+  "description": "<p>MATLAB implementation of the one-dimensional reaction\u2013diffusion model of tau-driven, spatially moving hotspots of amyloid-\u03b2 secondary nucleation.</p><p>Contents: <code>hotspot_params.m</code> (reference and dimensionally mapped parameter sets), <code>hotspot_solve.m</code> (method-of-lines solver, with an optional quasi-steady monomer reduction), <code>hotspot_post.m</code> (diagnostics: the three spatial maxima, Damk\u00f6hler numbers, screening lengths, and the hotspot-condition check), <code>run_all.m</code> (driver reproducing every numerical result quoted in Sections 4 and 5 of the manuscript), <code>make_figures.m</code> (regenerates Figs. 2\u20139), and <code>run_all_output.txt</code> (the driver's output log).</p><p>Base MATLAB only; no toolboxes required. Tested on R2023a.</p>",
+  "keywords": [
+    "Alzheimer disease", "amyloid-beta", "tau", "secondary nucleation",
+    "reaction-diffusion", "Damkohler number", "mathematical modeling", "MATLAB"
+  ],
+  "access_right": "open"
+}
