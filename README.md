@@ -20,6 +20,7 @@ make_figures       % Figs. 2–9 of the manuscript, written to ../figures
 | `hotspot_post.m`   | diagnostics: the three maxima, Damköhler numbers, screening lengths, Eq. (18) check |
 | `run_all.m`        | reproduces the numerical results quoted in the manuscript |
 | `make_figures.m`   | generates Figs. 2–9 (Fig. 1 is a schematic) |
+| `run_all_output.txt` | saved console output of `run_all`, for provenance: every number quoted in Sections 4 and 5 beside the published value |
 
 ## Model
 

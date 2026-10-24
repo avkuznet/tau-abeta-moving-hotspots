@@ -151,7 +151,7 @@ fprintf('    max |m_qss - m_full| = %.2e   (reference set: %.2e)\n', ...
 tag('5. SENSITIVITY TO MONOMER REDISTRIBUTION');
 Dms = [0.01 0.02 0.05 0.10 0.20];
 pubD = [4.4 5.5 8.3 12.8 NaN];
-pubX = [0.900 0.858 0.758 0.625 NaN];
+pubX = [0.900 0.856 0.756 0.625 NaN];
 fprintf('  %6s %16s %12s %16s %12s\n', 'D_m', 'detach (grid)', 'published', 'x_h(20) (grid)', 'published');
 for i = 1:numel(Dms)
     q = hotspot_params('reference'); q.D_m = Dms(i);
